@@ -51,6 +51,11 @@ cursor.execute(comando, vars(marcaB))
 marcaB.id = cursor.lastrowid
 banco.commit() """
 
+""" veiculo = Veiculo("CBA4321", 2022, "Prata", "MOTOR 1", 9101149350, 2)
+comando = '''INSERT INTO veiculo (placa, ano, cor, motor, proprietario, marca) VALUES (:placa,:ano,:cor,:motor,:proprietario,:marca);'''
+cursor.execute(comando, vars(veiculo))
+banco.commit() """
+
 """ comando = '''UPDATE pessoa SET oculos = :usa_oculos WHERE cpf = :cpf;'''
 cursor.execute(comando, {"usa_oculos": False, "cpf": 12365412390})
 banco.commit() """
@@ -64,6 +69,9 @@ print(query)
 query = cursor.execute("SELECT * FROM marca;").fetchall()
 print(query)
 query = cursor.execute("SELECT * FROM veiculo;").fetchall()
+print(query)
+print("--------------------")
+query = cursor.execute("SELECT V.placa, V.ano, V.cor, V.motor, V.proprietario, M.nome, M.sigla FROM veiculo V INNER JOIN marca M ON V.marca = M.id;").fetchall()
 print(query)
 
 cursor.close()
